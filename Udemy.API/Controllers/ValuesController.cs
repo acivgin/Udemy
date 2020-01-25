@@ -21,14 +21,14 @@ namespace UdemyWebAPI_Angular8.Controllers
         [HttpGet]
         public ActionResult<List<Value>> Get()
         {
-            return _context.Values.ToList();
+            return Ok(_context.Values.ToList());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<Value> Get(int id)
         {
-            return _context.Values.FirstOrDefault(v=>v.Id == id);
+            return Ok(_context.Values.FirstOrDefault(v=>v.Id == id));
         }
 
         // POST api/values
