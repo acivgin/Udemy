@@ -1,24 +1,34 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Udemy.API;
+using Udemy.API.Models;
 
 namespace UdemyWebAPI_Angular8.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
-    {
+    {       
+        private ApplicationDbContext _context; 
+        public ValuesController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<List<Value>> Get()
         {
-            return new string[] { "value1", "value2" , "value3", "value4" , "value5", "value6" };
+            return _context.Values.ToList();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Value> Get(int id)
         {
-            return "value";
+            return _context.Values.FirstOrDefault(v=>v.Id == id);
         }
 
         // POST api/values
