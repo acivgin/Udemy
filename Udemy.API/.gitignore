@@ -1,5 +1,7 @@
-.vscode
 .vs
+.suo
+storage.ide
+.dtbcache
 bin
 obj
 *.db 
