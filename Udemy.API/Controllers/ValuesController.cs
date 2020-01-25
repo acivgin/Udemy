@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace UdemyWebAPI_Angular8.Controllers
@@ -14,7 +11,7 @@ namespace UdemyWebAPI_Angular8.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" , "value3", "value4" };
+            return new string[] { "value1", "value2" , "value3", "value4" , "value5", "value6" };
         }
 
         // GET api/values/5
