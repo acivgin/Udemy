@@ -19,16 +19,16 @@ namespace UdemyWebAPI_Angular8.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<List<Value>> Get()
+        public async Task<ActionResult<List<Value>>> Get()
         {
-            return Ok(_context.Values.ToList());
+            return Ok(await _context.Values.ToListAsync());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<Value> Get(int id)
+        public async Task<ActionResult<Value>> Get(int id)
         {
-            var value = _context.Values.FirstOrDefault(v => v.Id == id);
+            var value = await _context.Values.FirstOrDefaultAsync(v => v.Id == id);
             
             if (value == null)
                 return NotFound();
