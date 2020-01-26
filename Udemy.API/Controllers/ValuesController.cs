@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Udemy.API.Data;
@@ -8,6 +9,7 @@ using Udemy.API.Models;
 
 namespace UdemyWebAPI_Angular8.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -24,12 +26,12 @@ namespace UdemyWebAPI_Angular8.Controllers
             return Ok(await _context.Values.ToListAsync());
         }
 
-        // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Value>> Get(int id)
         {
             var value = await _context.Values.FirstOrDefaultAsync(v => v.Id == id);
-            
+
             if (value == null)
                 return NotFound();
 

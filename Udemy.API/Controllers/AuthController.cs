@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Udemy.API.Data;
 using Udemy.API.DTOs;
 using Udemy.API.Models;
@@ -11,9 +12,12 @@ namespace Udemy.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository repository;
-        public AuthController(IAuthRepository repository)
+        private readonly IConfiguration _config;
+
+        public AuthController(IAuthRepository repository, IConfiguration config)
         {
             this.repository = repository;
+            this._config = config;
         }
 
         [HttpPost("register")]
@@ -34,5 +38,18 @@ namespace Udemy.API.Controllers
             return StatusCode(201);
         }
 
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserForRegisterDTO model)
+        {
+            var user = await repository.Login(model.UserName, model.Password);
+
+            if (user == null) return Unauthorized();
+
+            //Create Jwt Token
+            var token = Helpers.AuthHelper.CreateJwtToken(user.Id.ToString(), user.UserName, _config.GetSection("AppSettings:Token").Value);
+
+            return Ok(new { token = token });
+        }
     }
 }
