@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Udemy.API;
+using Udemy.API.Data;
 
 namespace UdemyWebAPI_Angular8.Migrations
 {

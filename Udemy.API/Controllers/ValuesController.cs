@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Udemy.API;
+using Udemy.API.Data;
 using Udemy.API.Models;
 
 namespace UdemyWebAPI_Angular8.Controllers

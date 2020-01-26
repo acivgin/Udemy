@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Udemy.API;
+using Udemy.API.Data;
 
 namespace UdemyWebAPI_Angular8
 {
@@ -30,6 +30,7 @@ namespace UdemyWebAPI_Angular8
             services.AddDbContext<ApplicationDbContext>(c => c.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
