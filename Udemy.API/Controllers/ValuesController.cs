@@ -11,8 +11,8 @@ namespace UdemyWebAPI_Angular8.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
-    {       
-        private ApplicationDbContext _context; 
+    {
+        private ApplicationDbContext _context;
         public ValuesController(ApplicationDbContext context)
         {
             _context = context;
@@ -28,7 +28,12 @@ namespace UdemyWebAPI_Angular8.Controllers
         [HttpGet("{id}")]
         public ActionResult<Value> Get(int id)
         {
-            return Ok(_context.Values.FirstOrDefault(v=>v.Id == id));
+            var value = _context.Values.FirstOrDefault(v => v.Id == id);
+            
+            if (value == null)
+                return NotFound();
+
+            return Ok(value);
         }
 
         // POST api/values
