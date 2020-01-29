@@ -8,24 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
-  values: any;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getValues();
   }
 
-  getValues() {
-    this.http.get('https://localhost:5001/api/values').subscribe(
-      response => {
-        this.values = response;
-      },
-      error => {
-        console.log(error.message);
-      }
-    );
-  }
   cancelRegisterModel(registerMode: boolean) {
     this.registerMode = registerMode;
   }
