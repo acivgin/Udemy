@@ -19,7 +19,8 @@ namespace UdemyWebAPI_Angular8.Controllers
         {
             _context = context;
         }
-        // GET api/values
+        
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<Value>>> Get()
         {
