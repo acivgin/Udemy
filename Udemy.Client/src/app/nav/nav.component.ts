@@ -23,14 +23,13 @@ export class NavComponent implements OnInit {
         this.alertify.success('Logged in sucessfully');
       },
       error => {
-           this.alertify.error(error);
+        this.alertify.error(error);
       }
     );
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token; // Return false if is empty
+    return this.authService.loggedIn();
   }
 
   logout() {
