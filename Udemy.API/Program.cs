@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Udemy.API.Data;
 using Microsoft.Extensions.Logging;
 
-namespace UdemyWebAPI_Angular8
+namespace Udemy.API
 {
     public class Program
     {

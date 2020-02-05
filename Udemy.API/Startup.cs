@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 
-namespace UdemyWebAPI_Angular8
+namespace Udemy.API
 {
     public class Startup
     {

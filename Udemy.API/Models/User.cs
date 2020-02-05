@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 namespace Udemy.API.Models
 {
     public class User

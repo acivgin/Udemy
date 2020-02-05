@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Udemy.API.Data;
 using Udemy.API.Models;
 
-namespace UdemyWebAPI_Angular8.Controllers
+namespace Udemy.API.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
