@@ -29,7 +29,8 @@ namespace Udemy.API.Data
         }
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await context.Users.Include(u => u.Photos).ToListAsync();
+            var users =  await context.Users.Include(u => u.Photos).ToListAsync();
+            return users; 
         }
 
         public async Task<bool> SaveAll()

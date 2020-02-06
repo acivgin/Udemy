@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyWebAPI_Angular8", "UdemyWebAPI_Angular8.csproj", "{269973BA-8B01-452C-A386-2201DF2A9092}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udemy.API", "Udemy.API.csproj", "{269973BA-8B01-452C-A386-2201DF2A9092}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
