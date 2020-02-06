@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -49,7 +51,7 @@ export function tokenGetter() {
     }),
     TabsModule.forRoot()
   ],
-  providers: [ErrorInterceptorProvider],
+  providers: [ErrorInterceptorProvider, MemberDetailResolver, MemberListResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
