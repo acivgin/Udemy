@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Udemy.API.Helpers
 {
@@ -10,6 +11,15 @@ namespace Udemy.API.Helpers
             response.Headers.Add(ApplicationError, message);
             response.Headers.Add("Access-Control-Expose-Headers", ApplicationError);
             response.Headers.Add("Access-Control-Allow-Origin", "*");
+        }
+
+        public static int CalculateAge(this DateTime date)
+        {
+            var age = DateTime.Now.Year - date.Year;
+            if (date.AddYears(age) > DateTime.Today)
+                age--;
+
+            return age;
         }
     }
 }
