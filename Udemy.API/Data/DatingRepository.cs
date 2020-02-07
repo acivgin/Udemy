@@ -26,8 +26,12 @@ namespace Udemy.API.Data {
             return users;
         }
 
-        public async Task<bool> SaveAll() {
-            return await context.SaveChangesAsync() != 0;
+        public async Task<bool> SaveAll () {
+            return await context.SaveChangesAsync () != 0;
+        }
+
+        public async Task<Photo> GetPhoto (int id) {
+            return await context.Photos.FirstOrDefaultAsync (p => p.Id == id);
         }
 
     }

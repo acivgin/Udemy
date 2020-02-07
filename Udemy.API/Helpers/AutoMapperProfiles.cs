@@ -14,8 +14,9 @@ namespace Udemy.API.Helpers {
                 .ForMember (dest => dest.Age, opt => opt.MapFrom (src => src.DateOfBirth.CalculateAge ()));
 
             CreateMap<UserForUpdateDto, User> ();
-
             CreateMap<Photo, UserPhotoDto> ();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
         }
     }
 }
