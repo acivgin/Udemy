@@ -1,28 +1,30 @@
-import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
-import { RouterModule } from '@angular/router';
-import { JwtModule } from '@auth0/angular-jwt';
-import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
-import { MemberListResolver } from './_resolvers/member-list.resolver';
-import { NgxGalleryModule } from 'ngx-gallery';
+import { MemberEditResolver } from "./_resolvers/member-edit.resolver";
+import { ErrorInterceptorProvider } from "./_services/error.interceptor";
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { BsDropdownModule, TabsModule } from "ngx-bootstrap";
+import { RouterModule } from "@angular/router";
+import { JwtModule } from "@auth0/angular-jwt";
+import { MemberDetailResolver } from "./_resolvers/member-detail.resolver";
+import { MemberListResolver } from "./_resolvers/member-list.resolver";
+import { NgxGalleryModule } from "ngx-gallery";
 
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { NavComponent } from './nav/nav.component';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberCardComponent } from './members/member-list/member-card/member-card.component';
-import { MemberDetailComponent } from './members/member-list/member-detail/member-detail.component';
-import { ListsComponent } from './lists/lists.component';
-import { MessagesComponent } from './messages/messages.component';
-import { appRoutes } from './routes';
+import { AppComponent } from "./app.component";
+import { HttpClientModule } from "@angular/common/http";
+import { NavComponent } from "./nav/nav.component";
+import { HomeComponent } from "./home/home.component";
+import { RegisterComponent } from "./register/register.component";
+import { MemberListComponent } from "./members/member-list/member-list.component";
+import { MemberCardComponent } from "./members/member-list/member-card/member-card.component";
+import { MemberDetailComponent } from "./members/member-list/member-detail/member-detail.component";
+import { MemberEditComponent } from "./members/member-list/member-edit/member-edit.component";
+import { ListsComponent } from "./lists/lists.component";
+import { MessagesComponent } from "./messages/messages.component";
+import { appRoutes } from "./routes";
 
 export function tokenGetter() {
-  return localStorage.getItem('token');
+  return localStorage.getItem("token");
 }
 
 export class CustomHammerConfig extends HammerGestureConfig {
@@ -42,7 +44,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
     ListsComponent,
     MessagesComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +56,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: ['localhost:5001'],
-        blacklistedRoutes: ['localhost:5001/api/auth']
+        whitelistedDomains: ["localhost:5001"],
+        blacklistedRoutes: ["localhost:5001/api/auth"]
       }
     }),
     TabsModule.forRoot(),
@@ -64,7 +67,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
     ErrorInterceptorProvider,
     MemberDetailResolver,
     MemberListResolver,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
+    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
+    MemberEditResolver
   ],
   bootstrap: [AppComponent]
 })
