@@ -61,7 +61,7 @@ namespace Udemy.API.Controllers {
             if (await repo.SaveAll ())
                 return NoContent ();
 
-            throw new Exception ($"Updateing user {id} failed on save");
+            throw new Exception ($"Updating user {id} failed on save");
         }
 
     }
