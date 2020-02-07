@@ -1,6 +1,12 @@
+import { AuthGuard } from "./_guards/auth.guard";
+import { AuthService } from "./_services/auth.service";
 import { MemberEditResolver } from "./_resolvers/member-edit.resolver";
 import { ErrorInterceptorProvider } from "./_services/error.interceptor";
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG
+} from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BsDropdownModule, TabsModule } from "ngx-bootstrap";
@@ -22,6 +28,9 @@ import { MemberEditComponent } from "./members/member-list/member-edit/member-ed
 import { ListsComponent } from "./lists/lists.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { appRoutes } from "./routes";
+import { UserService } from "./_services/user.service";
+import { AlertifyService } from "./_services/alertify.service";
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -64,6 +73,11 @@ export class CustomHammerConfig extends HammerGestureConfig {
     NgxGalleryModule
   ],
   providers: [
+    AuthService,
+    AuthGuard,
+    PreventUnsavedChanges,
+    UserService,
+    AlertifyService,
     ErrorInterceptorProvider,
     MemberDetailResolver,
     MemberListResolver,
