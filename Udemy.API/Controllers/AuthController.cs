@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Udemy.API.Data;
@@ -46,10 +47,11 @@ namespace Udemy.API.Controllers
 
             if (user == null) return Unauthorized();
 
+
             //Create Jwt Token
             var token = Helpers.AuthHelper.CreateJwtToken(user.Id.ToString(), user.UserName, _config.GetSection("AppSettings:Token").Value);
 
-            return Ok(new { token = token });
+            return Ok(new { token = token, user });
         }
     }
 }

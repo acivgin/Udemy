@@ -35,6 +35,7 @@ namespace Udemy.API.Controllers {
 
         [HttpGet ("{id}")]
         public async Task<IActionResult> GetUser (int id) {
+            
             var user = await repo.GetUser (id);
 
             if (user == null) return NotFound ();
