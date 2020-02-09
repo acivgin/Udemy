@@ -1,1 +1,6 @@
-.vs/
+*.db
+.vs
+.vscode
+obj
+bin
+appsettings.json
