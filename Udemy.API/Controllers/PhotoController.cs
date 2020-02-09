@@ -1,8 +1,6 @@
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using AutoMapper;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
@@ -14,7 +12,8 @@ using Udemy.API.DTOs;
 using Udemy.API.Helpers;
 using Udemy.API.Models;
 
-namespace Udemy.API.Controllers {
+namespace Udemy.API.Controllers
+{
 
     [Authorize]
     [Route ("api/users/{userId}/photos")]
@@ -126,6 +125,47 @@ namespace Udemy.API.Controllers {
                 return NoContent ();
 
             return BadRequest ("Could not set photo to main");
+        }
+
+        [HttpDelete ("{id}")]
+        public async Task<IActionResult> DeletePhoto (int userId, int id) {
+
+            //Check the id of logged in user
+            if (userId != int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value))
+                return Unauthorized ();
+
+            //Get the user to store the photo
+            var user = await repo.GetUser (userId);
+
+            //Photo with this Id doesn't exist
+            if (!user.Photos.Any (p => p.Id == id)) {
+                return Unauthorized ();
+            }
+
+            //Photo that user wants to mark as Main photo
+            var photoFromRepo = await repo.GetPhoto (id);
+
+            if (photoFromRepo.IsMain)
+                return BadRequest ("You cann't delete the Main photo");
+
+            //If we want to delete photo from Cloudinary
+            if (photoFromRepo.PublicId != null) {
+
+                var result = _cloudinary.Destroy (new DeletionParams (photoFromRepo.PublicId));
+                if (result.Result == "ok") {
+                    repo.Delete (photoFromRepo);
+                }
+            }
+
+            //If we want to delete photo from random user API for images
+            if (photoFromRepo.PublicId == null) {
+                repo.Delete (photoFromRepo);
+            }
+
+            if (await repo.SaveAll ())
+                return Ok ();
+
+            return BadRequest ("Failed to delete the photo");
         }
     }
 }
