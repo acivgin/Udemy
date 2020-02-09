@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Udemy.API.Models;
@@ -34,5 +35,8 @@ namespace Udemy.API.Data {
             return await context.Photos.FirstOrDefaultAsync (p => p.Id == id);
         }
 
+        public async Task<Photo> GetMainPhoto (int userId) {
+            return await context.Photos.Where (u => u.UserId == userId).FirstOrDefaultAsync (p => p.IsMain);
+        }
     }
 }

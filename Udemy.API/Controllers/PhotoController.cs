@@ -62,7 +62,7 @@ namespace Udemy.API.Controllers {
             if (file.Length <= 0) {
                 return BadRequest ("There is no File");
             }
-            
+
             //If there is a file, create some options and upload to cloudinary
             using (var stream = file.OpenReadStream ()) {
                 var uploadParams = new ImageUploadParams {
@@ -94,6 +94,38 @@ namespace Udemy.API.Controllers {
                 return CreatedAtRoute ("GetPhoto", new { userId = userId, id = photo.Id }, photoToReturn);
             }
             return BadRequest ("Could not add the photo");
+        }
+
+        [HttpPost ("{id}/setMain")]
+        public async Task<IActionResult> SetMainPhotoForUser (int userId, int id) {
+
+            //Check the id of logged in user
+            if (userId != int.Parse (User.FindFirst (ClaimTypes.NameIdentifier).Value))
+                return Unauthorized ();
+
+            //Get the user to store the photo
+            var user = await repo.GetUser (userId);
+
+            //Photo with this Id doesn't exist
+            if (!user.Photos.Any (p => p.Id == id)) {
+                return Unauthorized ();
+            }
+
+            //Photo that user wants to mark as Main photo
+            var photoFromRepo = await repo.GetPhoto (id);
+
+            //Get main photo for the user and unset main flag
+            var mainPhoto = await repo.GetMainPhoto (userId);
+            if (mainPhoto != null)
+                mainPhoto.IsMain = false;
+
+            //Set as Main Photo
+            photoFromRepo.IsMain = true;
+
+            if (await repo.SaveAll ())
+                return NoContent ();
+
+            return BadRequest ("Could not set photo to main");
         }
     }
 }
